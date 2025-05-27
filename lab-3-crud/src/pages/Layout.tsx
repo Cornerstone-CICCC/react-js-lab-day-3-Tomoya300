@@ -6,7 +6,7 @@ const Layout = () => {
   return (
     <div className="m-0 p-0 min-h-screen h-full w-full flex flex-col">
       {/* Header and Footer are always displayed */}
-      <Header />
+      <Header firstname="Tomoya"/>
       <main className="flex flex-1 flex-col p-4">
         <Outlet />
       </main>

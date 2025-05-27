@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom";
+import { memo } from "react";
 
-const Header = () => {
+type Props = {
+  firstname: string
+}
+
+const Header = memo(({ firstname }: Props) => {
   return (
     <header className="w-full h-20 flex bg-gray-400 items-center justify-between px-4">
       <div>LOGO</div>
@@ -12,8 +17,11 @@ const Header = () => {
           <li><Link to='/'>Contact</Link></li>
         </ul>
       </nav>
+      <div>
+        <p>{firstname}</p>
+      </div>
     </header>
   )
-}
+})
 
 export default Header;
