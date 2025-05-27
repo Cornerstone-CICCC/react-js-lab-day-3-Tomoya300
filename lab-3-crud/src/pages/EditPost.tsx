@@ -9,7 +9,7 @@ const EditPost = () => {
   if (!context) {
     throw new Error("EditPost must be used within a BlogContextProvider")
   }
-  const { blogs, setBlogs } = context
+  const { blogs, dispatch } = context
 
   const { id } = useParams()
   const editedPost = blogs.find((blog) => blog.id === id)
@@ -38,7 +38,7 @@ const EditPost = () => {
         content: editingPost.content,
         published: editedPost?.published ?? false,
       }
-      setBlogs((prevBlogs) => prevBlogs.map((blog) => (blog.id === id ? updatedPost : blog)))
+      dispatch({ type: 'EDIT', payload: updatedPost})
       navigate(`/blog/${id}`) // Redirect to the blog list page after editing a post
     } else {
       alert("Title and content are required")

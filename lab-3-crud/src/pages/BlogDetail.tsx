@@ -8,7 +8,7 @@ const BlogDetail = () => {
     throw new Error("BlogDetail must be used within a BlogContextProvider")
   }
 
-  const { blogs } = context
+  const { blogs, dispatch } = context
   const { id } = useParams()
   const thisBlog = blogs.find((blog) => blog.id === id)
 
@@ -18,8 +18,18 @@ const BlogDetail = () => {
     navigate(`/blog/edit/${id}`)
   }
 
+  const handleDelete = () => {
+    if (thisBlog) {
+      dispatch({ type: 'DELETE', payload: thisBlog })
+    }
+    navigate('/blog')
+    setTimeout(() => {
+      alert('Blog deleted successfully')
+    }, 1000);
+  }
+
   if (!thisBlog) {
-    return <h1>Blog not found</h1>
+    return <h1 className="text-center">Blog not found</h1>
   }
   
   return (
@@ -32,6 +42,9 @@ const BlogDetail = () => {
         <button onClick={handleEditBtn} className="border rounded-lg py-2 px-4">Edit</button>
       </div>
       <p className="mb-4 px-2">{thisBlog.content}</p>
+      <div>
+        <button onClick={handleDelete} className="border rounded-lg py-2 px-4">Delete</button>
+      </div>
     </div>
   )
 }

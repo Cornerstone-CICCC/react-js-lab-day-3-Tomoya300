@@ -1,13 +1,14 @@
 import { BlogContext } from "./BlogContext";
-import { useState, type ReactNode } from "react";
-import type { Blog } from "../types/blog.types";
+import { useReducer, type ReactNode } from "react";
+// import type { Blog } from "../types/blog.types";
+import { blogsReducer } from "../reducers/blogsReducer";
 
 
 export const BlogContextProvider = ({ children }: { children: ReactNode}) => {
-  const [blogs, setBlogs] = useState<Blog[]>([]);
+  const [state, dispatch] = useReducer(blogsReducer, { blogs: [] })
 
   return (
-    <BlogContext.Provider value={{ blogs, setBlogs }}>
+    <BlogContext.Provider value={{ blogs: state.blogs, dispatch }}>
       {children}
     </BlogContext.Provider>
   )

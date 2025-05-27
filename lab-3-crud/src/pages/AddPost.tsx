@@ -10,7 +10,7 @@ const AddPost = () => {
     throw new Error("AddBlog must be used within a BlogContextProvider")
   }
 
-  const { blogs, setBlogs } = context
+  const { dispatch } = context
   const [inputValue, setInputValue] = useState<Partial<Blog>>({
     title: "",
     content: ""
@@ -36,7 +36,7 @@ const AddPost = () => {
         content: inputValue.content,
         published: true,
       }
-      setBlogs([...blogs, newPost])
+      dispatch({ type: 'ADD', payload: newPost})
       setInputValue({ title: "", content: "" }) // Reset input fields after submission
       console.log("New post created:", newPost)
       navigate("/blog") // Redirect to the blog list page after creating a post
